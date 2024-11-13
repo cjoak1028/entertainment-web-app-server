@@ -17,11 +17,10 @@ export default class Content {
       .find()
       .toArray()
       .then((contents) => {
-        console.log(contents);
         return contents;
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 }

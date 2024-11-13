@@ -19,12 +19,11 @@ app.use((req, res, next) => {
   User.findById("6734fd2cd304601552999fa1")
     .then((user) => {
       req.user = user;
-      next();
     })
     .catch((err) => {
-      console.log(err);
-      next(err);
+      console.error(err);
     });
+  next();
 });
 
 app.use("/catalog", catalogRoutes);
