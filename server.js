@@ -1,23 +1,36 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
-import mediaRoutes from "./routes/media.js";
-import usersRoutes from "./routes/users.js";
+import catalogRoutes from "./routes/catalog.js";
 
 import errorController from "./controllers/error.js";
+import User from "./models/user.js";
 
-import mongoConnect from "./utils/db.js";
+import { mongoConnect } from "./utils/db.js";
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/media", mediaRoutes);
-app.use("/users", usersRoutes);
+app.use(cors());
+
+app.use((req, res, next) => {
+  User.findById("6734fd2cd304601552999fa1")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      next(err);
+    });
+});
+
+app.use("/catalog", catalogRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect((client) => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 });
