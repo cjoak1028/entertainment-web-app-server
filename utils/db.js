@@ -1,12 +1,16 @@
 import mongodb from "mongodb";
+import * as dotenv from "dotenv";
+
 const MongoClient = mongodb.MongoClient;
+
+dotenv.config();
+
+const mongoClientUrl = process.env.MONGO_CLIENT_URL;
 
 let _db;
 
 export const mongoConnect = (callback) => {
-  MongoClient.connect(
-    "mongodb+srv://cjoak1028:WfCZxfsQENcGm3Bj@cluster0.b8mxf.mongodb.net?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  MongoClient.connect(mongoClientUrl)
     .then((client) => {
       console.log("DB connected");
       _db = client.db("catalog");
