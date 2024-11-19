@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get("/", catalogController.getContents);
 
+router.post("/bookmarks", catalogController.postBookmarks);
+
 export default router;

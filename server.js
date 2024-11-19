@@ -15,15 +15,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
+app.use(express.json());
+
 app.use((req, res, next) => {
   User.findById("6734fd2cd304601552999fa1")
     .then((user) => {
-      req.user = user;
+      req.user = new User(user.email, user.bookmarks, user._id);
+      next();
     })
     .catch((err) => {
       console.error(err);
+      next();
     });
-  next();
 });
 
 app.use("/catalog", catalogRoutes);
