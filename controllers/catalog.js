@@ -11,6 +11,11 @@ const getContents = (req, res, next) => {
     });
 };
 
+const getBookmarks = (req, res, next) => {
+  const bookmarks = req.user.getBookmarks();
+  res.status(200).json(bookmarks);
+};
+
 const postBookmarks = (req, res, next) => {
   const contentId = req.body.contentId;
   req.user
@@ -24,4 +29,4 @@ const postBookmarks = (req, res, next) => {
     });
 };
 
-export default { getContents, postBookmarks };
+export default { getContents, getBookmarks, postBookmarks };

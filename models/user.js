@@ -16,6 +16,10 @@ export default class User {
     return db.collection("users").insertOne(this);
   }
 
+  getBookmarks() {
+    return this.bookmarks;
+  }
+
   addToBookmarks(contentId) {
     const db = getDb();
     return db.collection("users").updateOne(
