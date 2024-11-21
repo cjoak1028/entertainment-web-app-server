@@ -10,4 +10,9 @@ router.get("/bookmarks", catalogController.getBookmarks);
 
 router.post("/bookmarks", catalogController.postBookmarks);
 
+router.post(
+  "/bookmarks-delete-item",
+  catalogController.postBookmarksDeleteItem
+);
+
 export default router;

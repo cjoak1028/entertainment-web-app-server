@@ -29,4 +29,24 @@ const postBookmarks = (req, res, next) => {
     });
 };
 
-export default { getContents, getBookmarks, postBookmarks };
+const postBookmarksDeleteItem = (req, res, next) => {
+  const contentId = req.body.contentId;
+  req.user
+    .removeFromBookmarks(contentId)
+    .then((result) => {
+      res
+        .status(200)
+        .json({ message: "Bookmark deleted successfully", result });
+    })
+    .catch((err) => {
+      console.error(err);
+      next(err);
+    });
+};
+
+export default {
+  getContents,
+  getBookmarks,
+  postBookmarks,
+  postBookmarksDeleteItem,
+};

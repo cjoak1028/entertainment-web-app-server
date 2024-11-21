@@ -33,7 +33,7 @@ export default class User {
     return db
       .collection("users")
       .updateOne(
-        { _id: ObjectId.createFromHexString(this._id) },
+        { _id: this._id },
         { $pull: { bookmarks: ObjectId.createFromHexString(contentId) } }
       );
   }
